@@ -5,6 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LandingComponent } from './landing/landing.component';
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { counterReducer } from './store/basic-example/counter.reducer';
+import { coutnerEffects } from './store/basic-example/counter.effects';
 
 @NgModule({
   declarations: [
@@ -14,7 +17,13 @@ import { StoreModule } from '@ngrx/store';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    // StoreModule.forRoot({}, {}),
+    StoreModule.forRoot({
+      //TODO provide your reducers here
+      counterExmple : counterReducer
+      //TODO in case need auth for the user
+      // auth : authReducer
+    }),
+   EffectsModule.forRoot([coutnerEffects])
   
   ],
   providers: [],

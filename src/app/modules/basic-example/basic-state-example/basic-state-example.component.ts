@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { decrement, increment } from '../../../store/basic-example/counter.actions';
+import { decrement, increment, init } from '../../../store/basic-example/counter.actions';
 import { countSelector, doubleSelectorNGRX } from '../../../store/basic-example/counter.selector';
 
 @Component({
@@ -9,7 +9,7 @@ import { countSelector, doubleSelectorNGRX } from '../../../store/basic-example/
   templateUrl: './basic-state-example.component.html',
   styleUrl: './basic-state-example.component.scss'
 })
-export class BasicStateExampleComponent {
+export class BasicStateExampleComponent implements OnInit{
 
   counter$!: Observable<number>;
   doubleSelector$!: Observable<number>;
@@ -22,6 +22,9 @@ export class BasicStateExampleComponent {
     this.counterBySelector$ = store.select(countSelector);
 
     this.doubleSelector$ = store.select(doubleSelectorNGRX)
+  }
+  ngOnInit(): void {
+    this.store.dispatch(init())
   }
 
   increment() {
